@@ -209,4 +209,3 @@ export default function ProducerDashboard() {
     </div>
   );
 }
-}
