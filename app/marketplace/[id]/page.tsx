@@ -3,15 +3,19 @@ import { useEffect, useState } from "react";
 import AIMatchingResults from "@/components/marketplace/AIMatchingResults";
 import Card from "@/components/ui/Card";
 
-type Props = { params: { id: string } };
+type Props = { params: Promise<{ id: string }> };
 
 export default function ListingDetailPage({ params }: Props) {
   const [listing, setListing] = useState<any>(null);
   const [matches, setMatches] = useState<any[]>([]);
+  const [id, setId] = useState<string>("");
 
   useEffect(() => {
-    fetch(`/api/listings?id=${params.id}`).then(r => r.json()).then(setListing);
-  }, [params.id]);
+    params.then(({ id }) => {
+      setId(id);
+      fetch(`/api/listings?id=${id}`).then(r => r.json()).then(setListing);
+    });
+  }, [params]);
 
   useEffect(() => {
     if (!listing) return;
