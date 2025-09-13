@@ -1,4 +1,5 @@
 import { Users, Target, Award, Globe, Leaf, TrendingUp, Shield, Zap } from "lucide-react";
+import Header from "@/components/layout/Header";
 
 export default function AboutPage() {
   const stats = [
@@ -70,6 +71,7 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Header/>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-green-50 to-blue-50 py-20">
         <div className="max-w-6xl mx-auto px-4 text-center">
