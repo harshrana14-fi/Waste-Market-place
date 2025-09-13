@@ -10,6 +10,7 @@ interface ModalProps {
   size?: "sm" | "md" | "lg" | "xl" | "full";
   closable?: boolean;
   className?: string;
+  overlayClassName?: string;
 }
 
 export default function Modal({ 
@@ -61,15 +62,16 @@ export default function Modal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[100] overflow-y-auto">
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300"
+        className="fixed inset-0 bg-black bg-opacity-75 transition-opacity"
         onClick={closable ? onClose : undefined}
       />
       
       {/* Modal */}
-      <div className={`relative bg-white rounded-xl shadow-2xl w-full ${sizes[size]} ${className} transform transition-all duration-300 scale-100`}>
+      <div className="flex min-h-full items-center justify-center p-4">
+        <div className={`relative bg-white rounded-xl shadow-2xl w-full ${sizes[size]} ${className} transform transition-all duration-300 scale-100 z-[101]`}>
         {/* Header */}
         {(title || subtitle || closable) && (
           <div className="flex items-center justify-between p-6 border-b border-gray-200">
@@ -96,6 +98,7 @@ export default function Modal({
         <div className="p-6">
           {children}
         </div>
+      </div>
       </div>
     </div>
   );

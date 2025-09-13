@@ -47,11 +47,11 @@ export default function ProducerNavbar() {
               <BarChart3 className="w-4 h-4" />
               Dashboard
             </Link>
-            <Link href="/producer/listings" className="flex items-center gap-2 text-gray-700 hover:text-orange-600 transition-colors font-medium">
+            <Link href="/dashboard/producer/listings" className="flex items-center gap-2 text-gray-700 hover:text-orange-600 transition-colors font-medium">
               <Package className="w-4 h-4" />
               My Listings
             </Link>
-            <Link href="/producer/transactions" className="flex items-center gap-2 text-gray-700 hover:text-orange-600 transition-colors font-medium">
+            <Link href="/dashboard/producer/transactions" className="flex items-center gap-2 text-gray-700 hover:text-orange-600 transition-colors font-medium">
               <TrendingUp className="w-4 h-4" />
               Transactions
             </Link>
@@ -64,7 +64,7 @@ export default function ProducerNavbar() {
           <div className="flex items-center gap-4">
             {/* Create Listing Button */}
             <Link 
-              href="/producer/create-listing"
+              href="/dashboard/producer/create-listing"
               className="hidden sm:flex items-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors font-medium"
             >
               <Plus className="w-4 h-4" />
@@ -145,7 +145,7 @@ export default function ProducerNavbar() {
                   Dashboard
                 </Link>
                 <Link 
-                  href="/producer/listings" 
+                  href="/dashboard/producer/listings" 
                   className="flex items-center gap-2 px-3 py-2 text-gray-700 hover:text-orange-600 transition-colors font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -153,7 +153,7 @@ export default function ProducerNavbar() {
                   My Listings
                 </Link>
                 <Link 
-                  href="/producer/transactions" 
+                  href="/dashboard/producer/transactions" 
                   className="flex items-center gap-2 px-3 py-2 text-gray-700 hover:text-orange-600 transition-colors font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -171,7 +171,7 @@ export default function ProducerNavbar() {
 
               {/* Mobile Create Button */}
               <Link 
-                href="/producer/create-listing"
+                href="/dashboard/producer/create-listing"
                 className="flex items-center gap-2 w-full px-4 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >

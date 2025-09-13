@@ -1,39 +1,95 @@
-"use client";
-import { useEffect, useState } from "react";
-import { Search, Filter, MapPin, Calendar, TrendingUp, Star, Eye, Heart } from "lucide-react";
+'use client';
+
+import { useEffect, useState, useCallback } from "react";
+import Header from "@/components/layout/Header";
+import { Filter, MapPin, Calendar, TrendingUp, Star, Eye, Heart, Search } from "lucide-react";
 import FilterPanel from "@/components/marketplace/FilterPanel";
 import ListingCard from "@/components/marketplace/ListingCard";
 import ProductDetailsModal from "@/components/marketplace/ProductDetailsModal";
+import SearchInput from "@/components/marketplace/SearchInput";
 
 export default function MarketplacePage() {
-  const [filters, setFilters] = useState<{ 
+interface Listing {
+  _id: string;
+  type: string;
+  volume: string;
+  location: string;
+  frequency?: string;
+  description?: string;
+  price?: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  createdAt: string;
+  owner: {
+    _id: string;
+    company: string;
+    email: string;
+  };
+  rating?: number;
+  views?: number;
+  verified?: boolean;
+  tags?: string[];
+}  const [filters, setFilters] = useState<{ 
     type?: string; 
     location?: string; 
     volume?: string;
     priceRange?: string;
     sortBy?: string;
   }>({});
-  const [listings, setListings] = useState<any[]>([]);
+  const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Listing | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  }, []);
+
+  const handleViewModeChange = useCallback((mode: "grid" | "list") => {
+    setViewMode(mode);
+  }, []);
+
   useEffect(() => {
-    setLoading(true);
-    const qs = new URLSearchParams();
-    if (filters.type) qs.set("type", filters.type);
-    if (filters.location) qs.set("location", filters.location);
-    if (filters.volume) qs.set("volume", filters.volume);
-    if (filters.priceRange) qs.set("priceRange", filters.priceRange);
-    if (filters.sortBy) qs.set("sortBy", filters.sortBy);
-    if (searchQuery) qs.set("search", searchQuery);
-    
-    fetch(`/api/listings?${qs.toString()}`)
-      .then((r) => r.json())
-      .then(setListings)
-      .finally(() => setLoading(false));
+    const fetchListings = async () => {
+      try {
+        setLoading(true);
+        const qs = new URLSearchParams();
+        if (filters.type) qs.set("type", filters.type);
+        if (filters.location) qs.set("location", filters.location);
+        if (filters.volume) qs.set("volume", filters.volume);
+        if (filters.priceRange) qs.set("priceRange", filters.priceRange);
+        if (filters.sortBy) qs.set("sortBy", filters.sortBy);
+        if (searchQuery) qs.set("search", searchQuery);
+        
+        const response = await fetch(`/api/listings?${qs.toString()}`);
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.message || 'Failed to fetch listings');
+        }
+        
+        const data = await response.json();
+        
+        // Ensure owner information is included
+        const listingsWithOwners = data.map((listing: any) => ({
+          ...listing,
+          owner: listing.owner || {
+            company: 'Unknown Company',
+            email: '',
+          }
+        }));
+        
+        setListings(listingsWithOwners);
+      } catch (error) {
+        console.error('Error fetching listings:', error);
+        // You might want to show an error message to the user here
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchListings();
   }, [filters, searchQuery]);
 
   // Mock data for demonstration
@@ -138,6 +194,7 @@ export default function MarketplacePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Header />
       {/* Header Section */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 py-8">
@@ -301,7 +358,7 @@ export default function MarketplacePage() {
               }>
                 {displayListings.map((listing) => (
                   <div
-                    key={listing.id}
+                    key={"_id" in listing ? listing._id : (listing as any).id}
                     className={`bg-white rounded-lg shadow-sm border hover:shadow-md transition-shadow ${
                       viewMode === "list" ? "p-6" : "p-6"
                     }`}

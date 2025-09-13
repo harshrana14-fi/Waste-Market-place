@@ -313,7 +313,7 @@ export default function HowItWorksPage() {
                 "We've reduced our waste disposal costs by 65% while generating new revenue streams. 
                 The platform is incredibly easy to use."
               </p>
-              <div className="font-semibold text-gray-900">Sarah Johnson</div>
+              <div className="font-semibold text-gray-900">Shubham</div>
               <div className="text-sm text-gray-600">CEO, GreenTech Manufacturing</div>
             </div>
 
@@ -329,7 +329,7 @@ export default function HowItWorksPage() {
                 "The AI matching has helped us find the perfect suppliers for our recycling operations. 
                 Our efficiency has improved dramatically."
               </p>
-              <div className="font-semibold text-gray-900">Michael Chen</div>
+              <div className="font-semibold text-gray-900">Rahul </div>
               <div className="text-sm text-gray-600">Operations Director, EcoRecycle Ltd</div>
             </div>
 
@@ -345,7 +345,7 @@ export default function HowItWorksPage() {
                 "Our ESG reporting has never been easier. The green credits system helps us track 
                 and communicate our sustainability impact."
               </p>
-              <div className="font-semibold text-gray-900">Lisa Rodriguez</div>
+              <div className="font-semibold text-gray-900">Suteexn</div>
               <div className="text-sm text-gray-600">Sustainability Manager, GlobalCorp</div>
             </div>
           </div>

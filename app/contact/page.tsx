@@ -39,7 +39,7 @@ export default function ContactPage() {
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Call Us</h3>
               <p className="text-gray-600 mb-4">Speak directly with our team during business hours</p>
               <a href="tel:+1-555-0123" className="text-blue-600 hover:text-blue-700 font-semibold">
-                +1 (555) 012-3456
+                +91 XXXXXXXXXX
               </a>
             </div>
 
@@ -50,8 +50,8 @@ export default function ContactPage() {
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Visit Us</h3>
               <p className="text-gray-600 mb-4">Come see us at our headquarters</p>
               <p className="text-purple-600 font-semibold">
-                123 Green Street<br />
-                San Francisco, CA 94105
+                MAIT, Rohini <br />
+                New Delhi , Delhi 
               </p>
             </div>
           </div>

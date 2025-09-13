@@ -1,11 +1,12 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { prisma, mockUsers, checkDatabaseConnection, safeDbOperation } from "./prisma";
+import { MongoDBAdapter } from "./adapters/mongodb-adapter";
+import connectDB from "./mongodb";
+import { User } from "./models";
 import { compare } from "bcryptjs";
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
+  adapter: MongoDBAdapter(),
   session: { strategy: "jwt" },
   providers: [
     Credentials({
@@ -22,28 +23,59 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
         
-        // For development, use mock authentication directly
-        console.log('Using mock authentication for development');
-        const mockUser = mockUsers.find(u => u.email === credentials.email);
-        
-        if (!mockUser) {
-          console.log('Mock user not found:', credentials.email);
+        try {
+          await connectDB();
+          console.log('Looking for user with email:', credentials.email);
+          
+          const user = await User.findOne({ email: credentials.email });
+          console.log('User found:', user ? 'Yes' : 'No');
+          
+          if (!user) {
+            console.log('User not found:', credentials.email);
+            return null;
+          }
+          
+          console.log('User details:', {
+            email: user.email,
+            company: user.company,
+            role: user.role,
+            hasPasswordHash: !!user.passwordHash
+          });
+          
+          // For demo users, accept "demo123" as password
+          const isDemoUser = ['demo@example.com', 'recycler@example.com', 'corporate@example.com'].includes(user.email);
+          
+          if (isDemoUser) {
+            console.log('Demo user detected, checking password:', credentials.password === 'demo123');
+            if (credentials.password !== 'demo123') {
+              console.log('Invalid password for demo user:', credentials.email);
+              return null;
+            }
+          } else {
+            console.log('Regular user, comparing password hash');
+            console.log('Provided password:', credentials.password);
+            console.log('Stored hash:', user.passwordHash.substring(0, 20) + '...');
+            
+            const isValidPassword = await compare(credentials.password, user.passwordHash);
+            console.log('Password valid:', isValidPassword);
+            
+            if (!isValidPassword) {
+              console.log('Invalid password for user:', credentials.email);
+              return null;
+            }
+          }
+          
+          console.log('Authentication successful for:', credentials.email);
+          return {
+            id: user._id.toString(),
+            email: user.email,
+            name: user.company,
+            role: user.role
+          } as any;
+        } catch (error) {
+          console.error('Authentication error:', error);
           return null;
         }
-        
-        // Accept "demo123" as password for all demo accounts
-        if (credentials.password !== 'demo123') {
-          console.log('Invalid password for mock user:', credentials.email);
-          return null;
-        }
-        
-        console.log('Mock authentication successful for:', credentials.email);
-        return {
-          id: mockUser.id,
-          email: mockUser.email,
-          name: mockUser.company,
-          role: mockUser.role
-        } as any;
       },
     }),
   ],

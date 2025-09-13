@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/layout/Header";
+
 import Footer from "@/components/layout/Footer";
 import SessionProvider from "@/components/providers/SessionProvider";
+import AIChatbot from "@/components/chatbot/AIChatbot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,11 +38,12 @@ export default function RootLayout({
     <html lang="en" className="bg-white">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white min-h-screen`}>
         <SessionProvider>
-          <Header />
+          
           <main className="pt-16 bg-white min-h-screen">
             {children}
           </main>
           <Footer />
+          <AIChatbot />
         </SessionProvider>
       </body>
     </html>

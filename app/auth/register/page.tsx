@@ -80,13 +80,37 @@ export default function ProfessionalRegisterPage() {
     setErrors({});
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSuccess(true);
-      setTimeout(() => {
-        window.location.href = '/auth/login';
-      }, 2000);
+      console.log('Attempting registration with:', { company, email, role });
+      
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          company,
+          email,
+          password,
+          role
+        }),
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        console.log('Registration successful:', data);
+        setSuccess(true);
+        setTimeout(() => {
+          window.location.href = '/auth/login';
+        }, 2000);
+      } else {
+        console.log('Registration failed:', data);
+        setErrors({ 
+          general: data.error || 'Registration failed. Please try again.' 
+        });
+      }
     } catch (error) {
+      console.error('Registration error:', error);
       setErrors({ 
         general: 'Registration failed. Please try again.' 
       });

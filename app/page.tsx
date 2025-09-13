@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import Header from "@/components/layout/Header";
 import { ArrowRight, CheckCircle, Users, Zap, Shield, TrendingUp, Star, Globe, Factory, Recycle, Building, Play, Award, Target, Leaf, BarChart3, Lightbulb, ChevronDown, Menu, X, Link } from "lucide-react";
 
 export default function EnhancedHomePage() {
@@ -39,6 +40,7 @@ export default function EnhancedHomePage() {
 
   return (
     <div className="min-h-screen">
+      <Header />
       
 
       {/* Hero Section */}

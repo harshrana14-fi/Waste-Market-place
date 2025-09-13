@@ -170,24 +170,6 @@ export default function ProfessionalLoginPage() {
               <p className="text-gray-600">Sign in to your professional account</p>
             </div>
 
-            {/* Demo Credentials */}
-            <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
-              <h3 className="text-sm font-semibold text-blue-800 mb-3">Demo Credentials:</h3>
-              <div className="space-y-2 text-xs text-blue-700">
-                <div className="flex justify-between">
-                  <span>Producer:</span>
-                  <span className="font-mono">demo@example.com / demo123</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Recycler:</span>
-                  <span className="font-mono">recycler@example.com / demo123</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Corporate:</span>
-                  <span className="font-mono">corporate@example.com / demo123</span>
-                </div>
-              </div>
-            </div>
 
             {/* Error Message */}
             {errors.general && (

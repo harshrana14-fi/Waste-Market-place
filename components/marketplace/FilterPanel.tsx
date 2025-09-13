@@ -1,6 +1,7 @@
-"use client";
+'use client';
 import { useState } from "react";
 import { MapPin, DollarSign, Package } from "lucide-react";
+import FormSelect from "@/components/ui/FormSelect";
 
 type Props = { 
   onApply: (filters: { 

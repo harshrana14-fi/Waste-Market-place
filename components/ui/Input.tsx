@@ -1,7 +1,7 @@
 import { InputHTMLAttributes, forwardRef, useState } from "react";
 import { Eye, EyeOff, AlertCircle, CheckCircle } from "lucide-react";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   label?: string;
   error?: string;
   success?: string;
