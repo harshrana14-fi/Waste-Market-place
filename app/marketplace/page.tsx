@@ -8,7 +8,6 @@ import ListingCard from "@/components/marketplace/ListingCard";
 import ProductDetailsModal from "@/components/marketplace/ProductDetailsModal";
 import SearchInput from "@/components/marketplace/SearchInput";
 
-export default function MarketplacePage() {
 interface Listing {
   _id: string;
   type: string;
@@ -29,7 +28,10 @@ interface Listing {
   views?: number;
   verified?: boolean;
   tags?: string[];
-}  const [filters, setFilters] = useState<{ 
+}
+
+export default function MarketplacePage() {
+  const [filters, setFilters] = useState<{ 
     type?: string; 
     location?: string; 
     volume?: string;

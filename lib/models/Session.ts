@@ -18,7 +18,7 @@ const SessionSchema = new Schema<ISession>({
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
-  },
+  } as any,
   expires: {
     type: Date,
     required: true,

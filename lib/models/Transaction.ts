@@ -15,17 +15,17 @@ const TransactionSchema = new Schema<ITransaction>({
     type: Schema.Types.ObjectId,
     ref: 'Listing',
     required: true,
-  },
+  } as any,
   recycler: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
-  },
+  } as any,
   producer: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
-  },
+  } as any,
   volumeTons: {
     type: Number,
     required: true,

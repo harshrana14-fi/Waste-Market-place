@@ -13,7 +13,7 @@ const GreenCreditSchema = new Schema<IGreenCredit>({
     type: Schema.Types.ObjectId,
     ref: 'Transaction',
     required: true,
-  },
+  } as any,
   amount: {
     type: Number,
     required: true,

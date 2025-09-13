@@ -97,7 +97,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const recyclerProfile = await db.findUserById(session.user.id);
+    // Ensure session.user exists and may include an id (id is often added via next-auth callbacks)
+    const user = session.user as { id?: string } | undefined;
+    if (!user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const recyclerProfile = await db.findUserById(user.id);
     if (!recyclerProfile || recyclerProfile.role !== 'recycler') {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -141,11 +147,11 @@ export async function POST(req: NextRequest) {
 
     // Filter by minimum match score if specified
     const filteredListings = minMatchScore
-      ? matchedListings.filter(l => l.matchScore >= minMatchScore)
+      ? matchedListings.filter((l: any) => l.matchScore >= minMatchScore)
       : matchedListings;
 
     // Sort by match score
-    const sortedListings = filteredListings.sort((a, b) => b.matchScore - a.matchScore);
+    const sortedListings = filteredListings.sort((a: any, b: any) => b.matchScore - a.matchScore);
 
     return NextResponse.json(sortedListings);
   } catch (error) {

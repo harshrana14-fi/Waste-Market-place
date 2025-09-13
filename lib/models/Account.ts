@@ -20,7 +20,7 @@ const AccountSchema = new Schema<IAccount>({
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
-  },
+  } as any,
   type: {
     type: String,
     required: true,
