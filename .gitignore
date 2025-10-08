@@ -39,3 +39,19 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# python / data / models
+/venv/
+/yolovenv/
+/**/*.pt
+/**/*.avi
+/**/*.db
+/RealWaste/
+/runs/
+
+# archives and large binaries
+archive.zip
+*.zip
+*.7z
+*.tar
+*.tar.gz
