@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+numpy
+faiss-cpu
+sentence-transformers
+geopy
+sqlalchemy
+python-dotenv

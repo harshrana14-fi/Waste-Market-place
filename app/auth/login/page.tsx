@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff, Mail, Lock, ArrowRight, AlertCircle, CheckCircle, Shield, Zap, Users } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, ArrowRight, AlertCircle, CheckCircle } from "lucide-react";
 
 export default function ProfessionalLoginPage() {
   const [email, setEmail] = useState("");
@@ -97,75 +97,30 @@ export default function ProfessionalLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 flex">
-      {/* Left Side - Branding */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-green-600 to-blue-600 relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative z-10 flex flex-col justify-center px-12 text-white">
-          <div className="mb-8">
-            <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6">
-              <span className="text-white font-bold text-2xl">W</span>
-            </div>
-            <h1 className="text-4xl font-bold mb-4">Waste→Resource</h1>
-            <p className="text-xl text-green-100">Professional Waste Marketplace</p>
-          </div>
-          
-          <div className="space-y-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                <Shield className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Secure & Verified</h3>
-                <p className="text-green-100 text-sm">Enterprise-grade security</p>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                <Zap className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-semibold">AI-Powered Matching</h3>
-                <p className="text-green-100 text-sm">Smart waste-to-resource connections</p>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                <Users className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Trusted Network</h3>
-                <p className="text-green-100 text-sm">500+ verified partners</p>
-              </div>
-            </div>
+  <div className="min-h-screen bg-gray-50 flex items-start justify-center pt-4 pb-2 px-2">
+      <div className="w-full max-w-5xl bg-white rounded-3xl shadow-2xl grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
+        {/* Left Side - Illustration panel (inside card) */}
+        <div className="hidden lg:block bg-gradient-to-br from-green-400 to-amber-500 relative">
+          <div className="absolute inset-0 opacity-20" style={{backgroundImage: 'radial-gradient(circle at 10px 10px, rgba(0,0,0,0.15) 1px, transparent 1px)', backgroundSize: '20px 20px'}}></div>
+          <div className="relative z-10 h-full flex items-center justify-center p-6">
+            <img src="/images/login.jpg" alt="Recycling marketplace" className="w-full h-full max-w-xl object-cover rounded-2xl shadow-xl" />
           </div>
         </div>
-        
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-20 w-32 h-32 bg-white rounded-full"></div>
-          <div className="absolute top-40 right-20 w-24 h-24 bg-white rounded-full"></div>
-          <div className="absolute bottom-20 left-40 w-20 h-20 bg-white rounded-full"></div>
-          <div className="absolute bottom-40 right-40 w-28 h-28 bg-white rounded-full"></div>
-        </div>
-      </div>
 
-      {/* Right Side - Login Form */}
-      <div className="flex-1 flex items-center justify-center p-6">
-        <div className="w-full max-w-md">
-          {/* Mobile Logo */}
-          <div className="lg:hidden text-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <span className="text-white font-bold text-xl">W</span>
+        {/* Right Side - Login Form */}
+        <div className="flex items-center justify-center p-4">
+          <div className="w-full max-w-md">
+            {/* Mobile Logo */}
+            <div className="lg:hidden text-center mb-8">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-white font-bold text-xl">W</span>
+              </div>
+              <h1 className="text-2xl font-bold text-gray-900">Waste→Resource</h1>
+              <p className="text-gray-600">Professional Waste Marketplace</p>
             </div>
-            <h1 className="text-2xl font-bold text-gray-900">Waste→Resource</h1>
-            <p className="text-gray-600">Professional Waste Marketplace</p>
-          </div>
 
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
-            <div className="text-center mb-8">
+            <div className="">
+              <div className="text-center mb-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome Back</h2>
               <p className="text-gray-600">Sign in to your professional account</p>
             </div>
@@ -285,13 +240,14 @@ export default function ProfessionalLoginPage() {
             </form>
 
             {/* Sign Up Link */}
-            <div className="mt-8 pt-6 border-t border-gray-200 text-center">
+            <div className="mt-6 pt-4 border-t border-gray-200 text-center">
               <p className="text-sm text-gray-600">
                 Don't have an account?{" "}
                 <a href="/auth/register" className="text-green-600 hover:text-green-700 font-semibold transition-colors">
                   Create one now
                 </a>
               </p>
+            </div>
             </div>
           </div>
         </div>

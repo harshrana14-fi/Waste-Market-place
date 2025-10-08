@@ -224,7 +224,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="text-gray-400 text-sm flex items-center gap-2">
-              <span>© 2024 Waste→Resource Marketplace. All rights reserved.</span>
+              <span>© 2025 Waste→Resource Marketplace. All rights reserved.</span>
               <div className="hidden md:flex items-center gap-1">
                 <div className="w-1 h-1 bg-green-400 rounded-full animate-pulse"></div>
                 <div className="w-1 h-1 bg-blue-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>

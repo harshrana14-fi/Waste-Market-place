@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import Footer from "@/components/layout/Footer";
 import SessionProvider from "@/components/providers/SessionProvider";
 import AIChatbot from "@/components/chatbot/AIChatbot";
 
@@ -42,7 +41,7 @@ export default function RootLayout({
           <main className="pt-16 bg-white min-h-screen">
             {children}
           </main>
-          <Footer />
+          
           <AIChatbot />
         </SessionProvider>
       </body>

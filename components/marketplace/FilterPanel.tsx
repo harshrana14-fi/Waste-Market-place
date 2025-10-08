@@ -1,6 +1,6 @@
 'use client';
 import { useState } from "react";
-import { MapPin, DollarSign, Package } from "lucide-react";
+import { MapPin, IndianRupee, Package } from "lucide-react";
 import FormSelect from "@/components/ui/FormSelect";
 
 type Props = { 
@@ -32,14 +32,18 @@ export default function FilterPanel({ onApply }: Props) {
   ];
 
   const locations = [
-    "Detroit, MI",
-    "Los Angeles, CA", 
-    "Austin, TX",
-    "Houston, TX",
-    "New York, NY",
-    "Chicago, IL",
-    "Phoenix, AZ",
-    "Philadelphia, PA"
+    "Mumbai, Maharashtra",
+    "Delhi, Delhi", 
+    "Bangalore, Karnataka",
+    "Chennai, Tamil Nadu",
+    "Kolkata, West Bengal",
+    "Hyderabad, Telangana",
+    "Pune, Maharashtra",
+    "Ahmedabad, Gujarat",
+    "Jaipur, Rajasthan",
+    "Surat, Gujarat",
+    "Lucknow, Uttar Pradesh",
+    "Kanpur, Uttar Pradesh"
   ];
 
   const volumeRanges = [
@@ -50,10 +54,10 @@ export default function FilterPanel({ onApply }: Props) {
   ];
 
   const priceRanges = [
-    "Under $1,000",
-    "$1,000 - $2,500",
-    "$2,500 - $5,000", 
-    "$5,000+"
+    "Under ₹50,000",
+    "₹50,000 - ₹1,25,000",
+    "₹1,25,000 - ₹2,50,000", 
+    "₹2,50,000+"
   ];
 
   const handleApply = () => {
@@ -133,7 +137,7 @@ export default function FilterPanel({ onApply }: Props) {
       {/* Price Range */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          <DollarSign className="w-4 h-4 inline mr-1" />
+          <IndianRupee className="w-4 h-4 inline mr-1" />
           Price Range
         </label>
         <select

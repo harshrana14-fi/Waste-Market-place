@@ -1,18 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/database";
-import connectDB from "@/lib/mongodb";
 
 export async function POST(req: NextRequest) {
   try {
-    // First ensure database connection is active
-    try {
-      await connectDB();
-    } catch (error) {
-      console.error('Database connection failed:', error);
-      return NextResponse.json({ 
-        error: "Unable to connect to the database. Please try again later." 
-      }, { status: 503 });
-    }
 
     // Validate request body
     let body;

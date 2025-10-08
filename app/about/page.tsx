@@ -56,12 +56,6 @@ export default function AboutPage() {
       image: "/images/team/priya.jpg"
     },
     {
-      name: "Vidhi",
-      role: "VP of Operations",
-      bio: "Supply chain expert with extensive experience in industrial waste management.",
-      image: "/images/team/james.jpg"
-    },
-    {
       name: "Riya  ",
       role: "VP of Marketing",
       bio: "Marketing expert with 15 years in sustainable branding and communications.",
@@ -257,7 +251,7 @@ export default function AboutPage() {
               <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
               <div className="space-y-6 text-gray-600">
                 <p>
-                  Founded in 2022 by a team of sustainability experts and technology leaders, 
+                  Founded in 2024 by a team of sustainability experts and technology leaders, 
                   Waste→Resource was born from a simple observation: industrial waste was being 
                   treated as a liability when it could be a valuable asset.
                 </p>
@@ -277,7 +271,7 @@ export default function AboutPage() {
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold">2022</span>
+                    <span className="text-white font-bold">2024</span>
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">Company Founded</h3>
@@ -287,7 +281,7 @@ export default function AboutPage() {
                 
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold">2023</span>
+                    <span className="text-white font-bold">2025</span>
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">Platform Launch</h3>
@@ -297,7 +291,7 @@ export default function AboutPage() {
                 
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center">
-                    <span className="text-white font-bold">2024</span>
+                    <span className="text-white font-bold">2025</span>
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">Global Expansion</h3>

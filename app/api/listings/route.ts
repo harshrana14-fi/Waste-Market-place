@@ -103,4 +103,34 @@ export async function POST(req: NextRequest) {
   }
 }
 
+export async function PUT(req: NextRequest) {
+  try {
+    await connectDB();
+    const data = await req.json();
+    const { id, ...updates } = data || {};
+    if (!id) return NextResponse.json({ error: 'Missing listing id' }, { status: 400 });
+    const updated = await db.updateListing(id, updates);
+    if (!updated) return NextResponse.json({ error: 'Listing not found' }, { status: 404 });
+    return NextResponse.json(updated);
+  } catch (error) {
+    console.error('Update listing error:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  try {
+    await connectDB();
+    const url = new URL(req.url);
+    const id = url.searchParams.get('id');
+    if (!id) return NextResponse.json({ error: 'Missing listing id' }, { status: 400 });
+    const deleted = await db.deleteListing(id);
+    if (!deleted) return NextResponse.json({ error: 'Listing not found' }, { status: 404 });
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Delete listing error:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}
+
 

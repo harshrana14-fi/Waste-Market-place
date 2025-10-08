@@ -1,10 +1,41 @@
+"use client";
 import RecyclerNavbar from "@/components/layout/RecyclerNavbar";
 import StatsCard from "@/components/dashboard/StatsCard";
 import ImpactChart from "@/components/dashboard/ImpactChart";
 import GreenCreditsDisplay from "@/components/dashboard/GreenCreditsDisplay";
-import { TrendingUp, Users, Package, DollarSign, Leaf, Award, Activity, Zap, Recycle } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { TrendingUp, DollarSign, Activity, Zap, Recycle } from "lucide-react";
 
 export default function RecyclerDashboard() {
+  const [matches, setMatches] = useState<any[]>([]);
+  const [loadingMatches, setLoadingMatches] = useState<boolean>(false);
+  const chartsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const loadMatches = async () => {
+      try {
+        setLoadingMatches(true);
+        const res = await fetch('/api/matches/recommend', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({})
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setMatches(Array.isArray(data) ? data.slice(0, 5) : (data.matches || []).slice(0, 5));
+        }
+      } catch (e) {
+        console.error('Failed to load matches', e);
+      } finally {
+        setLoadingMatches(false);
+      }
+    };
+    loadMatches();
+  }, []);
+
+  const handleScrollToCharts = () => chartsRef.current?.scrollIntoView({ behavior: 'smooth' });
+
   return (
     <div className="min-h-screen bg-gray-50">
       <RecyclerNavbar />
@@ -15,15 +46,15 @@ export default function RecyclerDashboard() {
           <div className="bg-white rounded-lg shadow-sm border p-6">
             <h3 className="font-semibold mb-4">Quick Actions</h3>
             <div className="space-y-3">
-              <button className="w-full flex items-center gap-3 p-3 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 transition-colors">
+              <Link href="/recycler/matches" className="w-full flex items-center gap-3 p-3 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 transition-colors">
                 <Zap className="w-5 h-5 text-green-600" />
                 <span className="text-green-800 font-medium">View AI Matches</span>
-              </button>
-              <button className="w-full flex items-center gap-3 p-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors">
+              </Link>
+              <Link href="/marketplace" className="w-full flex items-center gap-3 p-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors">
                 <Recycle className="w-5 h-5 text-gray-600" />
                 <span className="text-gray-700 font-medium">Process Materials</span>
-              </button>
-              <button className="w-full flex items-center gap-3 p-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors">
+              </Link>
+              <button onClick={handleScrollToCharts} className="w-full flex items-center gap-3 p-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 transition-colors">
                 <TrendingUp className="w-5 h-5 text-gray-600" />
                 <span className="text-gray-700 font-medium">View Analytics</span>
               </button>
@@ -131,7 +162,7 @@ export default function RecyclerDashboard() {
           </div>
 
           {/* Charts Row */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div ref={chartsRef} className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <ImpactChart />
             
             {/* Processing Efficiency Chart */}
@@ -166,42 +197,34 @@ export default function RecyclerDashboard() {
           <div className="bg-white rounded-lg shadow-sm border p-6">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg font-semibold text-gray-900">Top AI Matches</h3>
-              <button className="text-green-600 hover:text-green-700 font-medium">
+              <Link href="/recycler/matches" className="text-green-600 hover:text-green-700 font-medium">
                 View All Matches
-              </button>
+              </Link>
             </div>
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                    <Zap className="w-6 h-6 text-green-600" />
+              {loadingMatches && (
+                <div className="text-sm text-gray-500">Loading matches…</div>
+              )}
+              {!loadingMatches && matches.length === 0 && (
+                <div className="text-sm text-gray-500">No matches found yet.</div>
+              )}
+              {matches.map((m, i) => (
+                <div key={i} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                      <Zap className="w-6 h-6 text-green-600" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">{m.type || m.name || 'Listing'}</h4>
+                      <p className="text-sm text-gray-600">{m.volume || m.volumeTons ? `${m.volume || m.volumeTons} tons` : ''} {m.distance ? `• ${m.distance} km` : ''} {m.matchScore || m.score ? `• ${m.matchScore || m.score}% match` : ''}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Metal Scraps</h4>
-                    <p className="text-sm text-gray-600">50 tons • Detroit, MI • 95% match</p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="font-semibold text-green-600">$2,500</div>
-                  <div className="text-sm text-gray-500">High quality</div>
-                </div>
-              </div>
-              
-              <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Zap className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Plastic Waste</h4>
-                    <p className="text-sm text-gray-600">25 tons • Detroit, MI • 88% match</p>
+                  <div className="text-right">
+                    {m.pricePerTon && <div className="font-semibold text-green-600">${m.pricePerTon}</div>}
+                    <div className="text-sm text-gray-500">{m.quality || 'Recommended'}</div>
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="font-semibold text-green-600">$1,200</div>
-                  <div className="text-sm text-gray-500">Good quality</div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

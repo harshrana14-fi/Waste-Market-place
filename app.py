@@ -16,14 +16,12 @@ from io import BytesIO
 import pandas as pd
 import random
 
-# 🎨 INSANE PAGE CONFIG WITH CUSTOM CSS
 st.set_page_config(
     page_title="🚀 EcoVision AI - Next-Gen Waste Classifier", 
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# 💫 CRAZY CUSTOM CSS FOR HACKATHON WOW FACTOR
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
@@ -99,7 +97,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# 🚀 ENHANCED WASTE DATA WITH ECO IMPACT
 enhanced_waste_data = {
     "battery": {
         "suggestion": "⚠️ HAZARDOUS! Take to specialized e-waste centers. Contains toxic materials.",

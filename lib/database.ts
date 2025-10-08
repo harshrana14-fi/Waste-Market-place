@@ -122,6 +122,11 @@ export const db = {
     volume: string;
     location: string;
     frequency?: string;
+    description?: string;
+    price?: string;
+    contactEmail?: string;
+    contactPhone?: string;
+    images?: string[];
     ownerId: string;
   }) {
     await connectDB();
@@ -129,7 +134,12 @@ export const db = {
       type: listingData.type,
       volume: listingData.volume,
       location: listingData.location,
-      frequency: listingData.frequency,
+      ...(listingData.frequency ? { frequency: listingData.frequency } : {}),
+      description: listingData.description,
+      price: listingData.price,
+      contactEmail: listingData.contactEmail,
+      contactPhone: listingData.contactPhone,
+      images: listingData.images,
       owner: listingData.ownerId,
       createdAt: new Date(),
     });
@@ -149,6 +159,30 @@ export const db = {
   async findListingById(id: string) {
     await connectDB();
     return await Listing.findById(id).populate('owner');
+  },
+
+  async updateListing(id: string, updates: {
+    type?: string;
+    volume?: string;
+    location?: string;
+    frequency?: string;
+    description?: string;
+    price?: string;
+    contactEmail?: string;
+    contactPhone?: string;
+    images?: string[];
+  }) {
+    await connectDB();
+    const payload: any = { ...updates };
+    if (payload.frequency === '' || payload.frequency === undefined) {
+      delete payload.frequency;
+    }
+    return await Listing.findByIdAndUpdate(id, { $set: payload }, { new: true }).populate('owner');
+  },
+
+  async deleteListing(id: string) {
+    await connectDB();
+    return await Listing.findByIdAndDelete(id);
   },
 
   // Transaction operations

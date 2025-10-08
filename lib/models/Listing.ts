@@ -10,6 +10,7 @@ export interface IListing extends Document {
   price?: string;
   contactEmail?: string;
   contactPhone?: string;
+  images?: string[];
   createdAt: Date;
   updatedAt: Date;
   owner: mongoose.Types.ObjectId;
@@ -110,10 +111,13 @@ const ListingSchema = new Schema<IListing>({
     type: String,
     trim: true,
   }],
+  images: [{
+    type: String,
+    trim: true,
+  }],
 });
 
 // Create indexes
-ListingSchema.index({ location: 1 });
 ListingSchema.index({ tags: 1 });
 ListingSchema.index({ type: 1, createdAt: -1 });
 ListingSchema.index({ owner: 1, createdAt: -1 });
