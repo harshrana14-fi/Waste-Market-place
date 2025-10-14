@@ -13,7 +13,7 @@ export const prisma = globalForPrisma.prisma || new PrismaClient({
 });
 
 // Add connection error handling
-prisma.$connect().catch((error) => {
+prisma.$connect().catch((error: unknown) => {
   console.error('Failed to connect to database:', error);
   if (process.env.NODE_ENV === 'development') {
     console.log('Using mock data for development...');
