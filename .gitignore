@@ -43,6 +43,7 @@ next-env.d.ts
 # python / data / models
 /venv/
 /yolovenv/
+*.pyd
 /**/*.pt
 /**/*.avi
 /**/*.db
