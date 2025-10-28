@@ -36,32 +36,7 @@ export default function AboutPage() {
     }
   ];
 
-  const team = [
-    {
-      name: "Pushkar Jain",
-      role: "CEO & Co-Founder",
-      bio: "Former McKinsey consultant with 15 years in sustainability and circular economy.",
-      image: "/images/team/sarah.jpg"
-    },
-    {
-      name: "Harsh Rana ",
-      role: "CTO & Co-Founder", 
-      bio: "AI/ML expert who previously led data science teams at Google and Tesla.",
-      image: "/images/team/marcus.jpg"
-    },
-    {
-      name: "Rahul ",
-      role: "Head of Sustainability",
-      bio: "Environmental scientist with PhD from MIT and 20 years in waste management.",
-      image: "/images/team/priya.jpg"
-    },
-    {
-      name: "Riya  ",
-      role: "VP of Marketing",
-      bio: "Marketing expert with 15 years in sustainable branding and communications.",
-      image: "/images/team/aman.jpg"
-    }
-  ];
+ 
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -218,30 +193,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Meet Our Team</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              The passionate individuals driving our mission forward
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-shadow text-center">
-                <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <Users className="w-12 h-12 text-gray-400" />
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-1">{member.name}</h3>
-                <p className="text-sm text-green-600 mb-3">{member.role}</p>
-                <p className="text-sm text-gray-600">{member.bio}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+     
 
       {/* Story Section */}
       <section className="py-20 bg-white">

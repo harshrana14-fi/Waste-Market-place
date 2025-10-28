@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import SessionProvider from "@/components/providers/SessionProvider";
-import AIChatbot from "@/components/chatbot/AIChatbot";
+import VoiceflowWidget from "@/components/VoiceflowWidget";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,7 +42,7 @@ export default function RootLayout({
             {children}
           </main>
           
-          <AIChatbot />
+          <VoiceflowWidget />
         </SessionProvider>
       </body>
     </html>
